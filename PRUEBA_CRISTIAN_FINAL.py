@@ -14,6 +14,7 @@ varcorreo=0
 alias=0
 aliasingreso=0
 lista=[]
+error_edad = False
 ##rut.nombre.edad
 
 while opcion != 4:
@@ -25,6 +26,7 @@ while opcion != 4:
             print( " Usted ha seleccionado la opción Registrarse")
             try:
                 rut = int(input( " Por favor ingrese su rut sin digito verificador: "))
+                lista.append(rut)
                 
             except ValueError:
                     print("Solo debe ingresar numeros")
@@ -32,47 +34,52 @@ while opcion != 4:
                     if respuesta=="n":
                         break
             dv = str(input( " Por favor ingrese su digito verificador: "))
+            lista.append(dv)            
 
             while len(dv) != 1:
                 try:
                    dv = str(input( " Por favor ingrese su digito verificador correctamente: "))
-
+                   lista.append(dv)
                 except:
                     print('ingrese correctamente el digito validador')
            
             nombre = str(input( " Por favor ingrese su Nombre: "))
+            lista.append(nombre)
 
-            while len(nombre) ==0:
+            while len(nombre) == 0:
                 try:
                    nombre = str(input( " Por favor ingrese su nombre correctamente: "))
-
+                   lista.append(nombre)
+                   
                 except:
                     print('ingrese correctamente el Nombre')
 
             edad = int(input( " Por favor Edad: "))
-
-            while edad <18 or edad>100:
-                try:
-                   edad = int(input( " Por favor ingrese su Edad Correctamente: "))
-
-                except ValueError:
-                    print("Solo debe ingresar numeros")
-                    respuesta=input("Desea ingresar nuevamente los valores?[s/n]")
-                    if respuesta=="n":
-                        break
-            
-            
+                         
+            if edad < 18 or edad > 100:
+                print("Debes ser mayor de edad")
+            else:
+                lista.append(edad)
+              
+                        
             
             alias = str(input( " Por favor ingrese su alias: "))
-
-            while len(nombre) ==0:
+            lista.append(alias)
+            while len(alias) ==0:
                 try:
                    alias = str(input( " Por favor ingrese su alias correctamente: "))
+                   lista.append(alias)
 
                 except:
                     print('ingrese correctamente el alias')
             
             correo = str(input( " Por favor ingrese su Correo: "))
+            for letra in correo: 
+                if letra == "@":
+                    lista.append(correo)
+            print(lista)
+            for i in lista:
+                print(i)
             
 
 
@@ -95,9 +102,9 @@ while opcion != 4:
                 for indice, nombre in enumerate(lista):
                     if indice == 0:
                         print(f"rut: {rut}-{dv}")
-                    elif indice == 1:
-                        print(f"edad: {nombre}")
                     elif indice == 3:
+                        print(f"edad: {nombre}")
+                    elif indice == 2:
                         print(f"nombre: {nombre}")
                     elif indice == 4:
                         print(f"usuario: {nombre}")
